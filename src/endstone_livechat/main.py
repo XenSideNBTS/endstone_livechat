@@ -1,12 +1,13 @@
 from endstone.plugin import Plugin
 from endstone.event import EventPriority, event_handler
-from endstone.game import Game
-from endstone.player import Player
+from endstone._internal.endstone_python import PlayerChatEvent
 import requests
 import json
 from pathlib import Path
 
 class LiveChat(Plugin):
+    api_version = "0.5"
+
     def on_load(self):
         config_path = Path(self.data_folder) / "config.yml"
         default_config = {"webhook_url": "YOUR_DISCORD_WEBHOOK_URL"}
@@ -21,9 +22,10 @@ class LiveChat(Plugin):
         self.logger.info("LiveChat plugin disabled!")
     
     @event_handler(EventPriority.NORMAL)
-    def on_player_chat(self, game: Game, player: Player, message: str):
+    def on_player_chat(self, event: PlayerChatEvent):
         webhook_url = self._config.get("webhook_url")
-        player_name = player.name
+        player_name = event.player.name
+        message = event.message
         payload = {
             "content": f"**{player_name}**: {message}"
         }
@@ -43,6 +45,3 @@ class LiveChat(Plugin):
         config_path = Path(self.data_folder) / "config.yml"
         with open(config_path, "w") as f:
             json.dump(config, f, indent=4)
-
-def plugin():
-    return LiveChat()
