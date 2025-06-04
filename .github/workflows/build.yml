@@ -40,5 +40,5 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: endstone_essentials.whl
+          name: endstone-livechat.whl
           path: dist/*.whl
