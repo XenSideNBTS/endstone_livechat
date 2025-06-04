@@ -1,3 +1,3 @@
-from endstone_playerinfo.main import PlayerInfo
+from endstone_livechat.main import livechat
 
-__all__ = ["PlayerInfo"]
+__all__ = ["livechat"]
