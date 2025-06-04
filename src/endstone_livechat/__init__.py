@@ -1,3 +1,3 @@
-from endstone_livechat.main import livechat
+from .livechat import LiveChat
 
-__all__ = ["livechat"]
+__all__ = ["LiveChat"]
