@@ -9,6 +9,7 @@ class LiveChat(Plugin):
     api_version = "0.5"
 
     def on_load(self):
+        self.logger.info(f"Data folder: {self.data_folder}")
         config_path = Path(self.data_folder) / "config.yml"
         default_config = {"webhook_url": "YOUR_DISCORD_WEBHOOK_URL"}
         if not config_path.exists():
@@ -44,5 +45,6 @@ class LiveChat(Plugin):
     
     def save_config(self, config):
         config_path = Path(self.data_folder) / "config.yml"
+        config_path.parent.mkdir(parents=True, exist_ok=True)
         with open(config_path, "w") as f:
             json.dump(config, f, indent=4)
