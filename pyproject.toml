@@ -9,4 +9,4 @@ author = "xensidewtf"
 description = "Send minecraft chat to discord using webhook."
 
 [project.entry-points."endstone"]
-playerinfo = "endstone_livechat:livechat"
+livechat = "endstone_livechat:livechat"
