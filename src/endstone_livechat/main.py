@@ -5,7 +5,7 @@ import requests
 import json
 from pathlib import Path
 
-class LiveChat(Plugin):
+class livechat(Plugin):
     api_version = "0.5"
 
     def on_load(self):
