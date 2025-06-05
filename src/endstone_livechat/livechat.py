@@ -11,7 +11,10 @@ class LiveChat(Plugin):
     def on_load(self):
         self.logger.info(f"Data folder: {self.data_folder}")
         config_path = Path(self.data_folder) / "config.yml"
-        default_config = {"webhook_url": "YOUR_DISCORD_WEBHOOK_URL"}
+        default_config = {
+            "webhook_url": "YOUR_DISCORD_WEBHOOK_URL",
+            "avatar_url": "https://example.com/default_avatar.png"
+        }
         if not config_path.exists():
             self.save_config(default_config)
         self._config = self.load_config()
@@ -26,10 +29,12 @@ class LiveChat(Plugin):
     @event_handler
     def on_player_chat(self, event: PlayerChatEvent):
         webhook_url = self._config.get("webhook_url")
+        avatar_url = self._config.get("avatar_url")
         player_name = event.player.name
         message = event.message
         payload = {
-            "content": f"**{player_name}**: {message}"
+            "content": f"**{player_name}**: {message}",
+            "avatar_url": avatar_url
         }
         
         try:
