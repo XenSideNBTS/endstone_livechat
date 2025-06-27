@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "endstone-livechat"
+version = "2.0.0"
+authors = [
+    { name = "xensidewtf" }
+]
+description = "A plugin to send Minecraft Bedrock chat messages to Discord via webhook"
+dependencies = [
+    "endstone>=0.5",
+    "requests>=2.28.0",
+    "discord.py>2.5.1"
+]
+
+[project.entry-points."endstone"]
+livechat = "endstone_livechat:LiveChat"
